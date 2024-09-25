@@ -1,0 +1,1 @@
+export const imgUrl = 'http://localhost:8000/uploads/media'
