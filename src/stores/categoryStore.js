@@ -10,10 +10,13 @@ export const useCategoryStore = defineStore("categoryStore", () => {
   } = useAxios(`${url}/all-category`, { immediate: false });  
 
 
-  const getSubCategory =(id) =>{
-    return category.value.find(item => item.id == id);
-  }
-
+  const getSubCategory = (id) => {
+    // Ensure data is loaded and defined
+    if (category.value && category.value.length > 0) {
+      return category.value.find((item) => item.id == id);
+    }
+    return null; // Or handle it as needed
+  };
   
   return { fetchCategoryExecute, category, categoryLoading , getSubCategory};
 });

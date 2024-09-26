@@ -1,3 +1,27 @@
+<script setup>
+import { useStoreDrawerCart } from "@/stores/storeDrawerCart";
+import { useUserStore } from "@/stores/userStore";
+import { reactive, ref, computed, onMounted } from "vue";
+import { RouterLink, useRoute } from "vue-router";
+const storeDrawer = useStoreDrawerCart();
+const userStore = useUserStore();
+
+const links = ref([
+  { text: "Home", route: "/" },
+  { text: "Product", route: "/product" },
+  { text: "Showroom", route: "/signin" },
+]);
+const route = useRoute();
+const isActiveRoute = (routePath) => route.path === routePath;
+
+const props = defineProps({
+  user: {
+    type: Object,
+    default: null,
+  },
+});
+</script>
+
 <template>
   <v-app-bar elevation="0">
     <v-container class="d-flex align-center justify-space-between">
@@ -54,27 +78,22 @@
           color="primary"
           rounded="lg"
           to="/authentication/user"
+          v-if="!user"
         >
           Login
         </v-btn>
+
+        <v-avatar
+          v-if="user"
+          class="cursor-pointer"
+          color="primary"
+          @click="userStore.userLogout"
+        >
+          <span class="text-h5 font-weight-bold">{{
+            user.name.toUpperCase().slice(0, 1)
+          }}</span>
+        </v-avatar>
       </div>
     </v-container>
   </v-app-bar>
 </template>
-
-<script setup>
-import { useStoreDrawerCart } from "@/stores/storeDrawerCart";
-import { reactive, ref, computed } from "vue";
-import { RouterLink, useRoute } from "vue-router";
-const storeDrawer = useStoreDrawerCart();
-
-const links = ref([
-  { text: "Home", route: "/" },
-  { text: "Product", route: "/product" },
-  { text: "Showroom", route: "/signin" },
-]);
-
-const route = useRoute();
-
-const isActiveRoute = (routePath) => route.path === routePath;
-</script>

@@ -18,7 +18,6 @@ const products = computed(() => {
 useProduct.fetchProductExecute();
 
 const useCategory = useCategoryStore();
-
 const catgeory = computed(() => {
   return useCategory.category;
 });

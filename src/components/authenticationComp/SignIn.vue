@@ -1,7 +1,7 @@
 <script setup>
 import { useAuthentication } from "@/stores/authentication";
 import { useUserStore } from "@/stores/userStore";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 const authenticate = useAuthentication();
 const userStore = useUserStore();
@@ -19,9 +19,26 @@ const signIn = async () => {
   });
 
   if (res.response.value.status == 200) {
-    userStore.fetchUserExecute();
+    await userStore.fetchUserExecute();
     router.push("/");
   }
+};
+
+const isSubmitDisable = computed(() => {
+  return (
+    !email.value ||
+    !password.value ||
+    rules.email(email.value) !== true ||
+    rules.min(password.value) !== true
+  );
+});
+
+const rules = {
+  email: (v) => {
+    const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return pattern.test(v) || "Invalid e-mail";
+  },
+  min: (v) => (v || "").length >= 8 || "Min 8 characters",
 };
 </script>
 
@@ -35,6 +52,7 @@ const signIn = async () => {
       v-model="email"
       prepend-inner-icon="mdi-email"
       class="mt-3"
+      :rules="[rules.email]"
     ></v-text-field>
 
     <div
@@ -52,6 +70,7 @@ const signIn = async () => {
     <v-text-field
       v-model="password"
       type="password"
+      :rules="[rules.min]"
       prepend-inner-icon="mdi-lock"
       class="mt-3"
     ></v-text-field>
@@ -64,7 +83,7 @@ const signIn = async () => {
       color="primary"
       class="mt-2"
       size="large"
-      variant="tonal"
+      :disabled="isSubmitDisable"
       block
       :loading="authenticate.signInLoading"
     >

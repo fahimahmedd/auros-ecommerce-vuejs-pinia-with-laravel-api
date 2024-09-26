@@ -1,53 +1,78 @@
 <script setup>
 import { useAuthentication } from "@/stores/authentication";
 import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 
 const authenticate = useAuthentication();
-
 const name = ref();
 const email = ref();
 const password = ref();
 const password_confirmation = ref();
-const phone = ref();
+const showPass = ref(false);
+const showConfirmedPass = ref(false);
 
-function register() {
-  // if (!name.value || !email.value || !password.value || !password_confirmation.value)
-  //   return;
-
-  console.log("ksdjfhgal");
-  authenticate.executeRegister({
+const register = async () => {
+  const res = await authenticate.executeRegister({
     data: {
       name: name.value,
       email: email.value,
       password: password.value,
       password_confirmation: password_confirmation.value,
-      phone: phone.value,
     },
   });
-}
+
+  if (res.response.value.status === 200) {
+    authenticate.authenticateSwitch();
+    emit("showSnackbar");
+  }
+};
+
+const emit = defineEmits();
+
+const rules = {
+  required: (value) => !!value || "Required",
+  min: (v) => (v || "").length >= 8 || "Min 8 characters",
+  email: (v) => {
+    const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return pattern.test(v) || "Invalid e-mail";
+  },
+  pass: (value) => value === password.value || "Password Not Matched!",
+};
+
+const isSubmitDisable = computed(() => {
+  return (
+    !name.value ||
+    !email.value ||
+    !password.value ||
+    !password_confirmation.value ||
+    rules.required(password.value) !== true ||
+    rules.min(password.value) !== true ||
+    rules.email(email.value) !== true ||
+    rules.pass(password_confirmation.value) !== true
+  );
+});
 </script>
 
 <template>
   <v-card width="100%" max-width="400" elevation="0" class="pl-8">
     <div class="text-h5 font-weight-black text-uppercase text-center">Sign Up</div>
     <v-divider class="my-5"></v-divider>
-    <div class="text-subtitle-1 text-medium-emphasis mt-8">Full Name</div>
+    <div class="text-subtitle-1 text-medium-emphasis mt-8">Name</div>
     <v-text-field
       v-model="name"
       prepend-inner-icon="mdi-account"
-      class="mt-3"
+      class="mt-2"
+      color="primary"
     ></v-text-field>
 
-    <!-- <div class="text-subtitle-1 text-medium-emphasis">Email Address</div> -->
+    <div class="text-subtitle-1 text-medium-emphasis">Email Address</div>
     <v-text-field
       v-model="email"
       type="email"
+      :rules="[rules.email]"
+      class="mt-2"
       prepend-inner-icon="mdi-email"
-    ></v-text-field>
-    <v-text-field
-      v-model="phone"
-      type="number"
-      prepend-inner-icon="mdi-phone"
+      color="primary"
     ></v-text-field>
     <div
       class="text-subtitle-1 text-medium-emphasis d-flex align-center justify-space-between"
@@ -56,41 +81,34 @@ function register() {
     </div>
     <v-text-field
       v-model="password"
-      type="password"
+      :type="showPass ? 'text' : 'password'"
       prepend-inner-icon="mdi-lock"
-      class="mt-3"
-      placeholder="6+ Character"
+      :rules="[rules.required, rules.min]"
+      :append-inner-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+      class="mt-2"
+      placeholder="Password"
+      color="primary"
+      @click:append-inner="showPass = !showPass"
     ></v-text-field>
+
     <v-text-field
       v-model="password_confirmation"
-      type="password"
+      :rules="[rules.pass]"
+      :type="showConfirmedPass ? 'text' : 'password'"
       prepend-inner-icon="mdi-lock"
+      :append-inner-icon="showConfirmedPass ? 'mdi-eye' : 'mdi-eye-off'"
       placeholder="Confirm Password"
+      color="primary"
+      class="mt-1"
+      @click:append-inner="showConfirmedPass = !showConfirmedPass"
     ></v-text-field>
-
-    <v-card-text class="d-none text-medium-emphasis text-caption pa-2 assh-bg-color">
-      Warning: After 3 consecutive failed login attempts,
-    </v-card-text>
-
-    <!-- <div class="d-flex align-center">
-      <v-checkbox
-        class="shrink mr-0 mt-0"
-        color="primary"
-        hide-details
-        density="compact"
-      ></v-checkbox>
-      <span class="text-subtitle-2 font-weight-regular text-medium-emphasis ml-4">
-        I agree with Auros's Terms of Service.</span
-      >
-    </div> -->
-
     <v-btn
       @click="register"
       color="primary"
-      class="mt-5"
+      class="mt-3"
       size="large"
-      variant="tonal"
       block
+      :disabled="isSubmitDisable"
       :loading="authenticate.signUpLoading"
     >
       Create Account

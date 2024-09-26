@@ -6,19 +6,14 @@ import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
-
-const catgeoryStore = useCategoryStore();
-
-const soterSubCategory = catgeoryStore.getSubCategory(route.params.id);
-
-const subCategory = soterSubCategory.child;
-
-console.log(subCategory);
+const categoryStore = useCategoryStore();
+const subCategory = categoryStore.getSubCategory(route.params.id).child;
 </script>
 
 <template>
   <PageIntro />
-  <CategoryProduct :sub-category="subCategory" />
+  <SubCategory :sub-category="subCategory" />
+  <CategoryProduct />
 </template>
 
 <style scoped lang="scss"></style>

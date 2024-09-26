@@ -1,3 +1,19 @@
+<script setup>
+import SignIn from "@/components/authenticationComp/SignIn.vue";
+import SignUp from "@/components/authenticationComp/SignUp.vue";
+import CommonSnackbar from "@/components/snackbars/CommonSnackbar.vue";
+import { useAuthentication } from "@/stores/authentication";
+import { ref } from "vue";
+
+const autheticate = useAuthentication();
+
+const showSignupSnackBar = ref(false);
+
+const handleShowSnackbar = () => {
+  showSignupSnackBar.value = true;
+};
+</script>
+
 <template>
   <v-container fluid class="pa-0">
     <div class="authentication-graphic">
@@ -9,19 +25,14 @@
           <SignIn />
         </v-col>
         <v-col v-if="!autheticate.showSigIn" cols="4" class="pa-0">
-          <SignUp />
+          <SignUp @showSnackbar="handleShowSnackbar" />
         </v-col>
       </v-row>
     </div>
+
+    <!-- Sign Up Massage-->
+    <CommonSnackbar v-if="showSignupSnackBar" content="Sign Up Successfull!" />
   </v-container>
 </template>
-
-<script setup>
-import SignIn from "@/components/authenticationComp/SignIn.vue";
-import SignUp from "@/components/authenticationComp/SignUp.vue";
-import { useAuthentication } from "@/stores/authentication";
-
-const autheticate = useAuthentication();
-</script>
 
 <style scoped lang="scss"></style>

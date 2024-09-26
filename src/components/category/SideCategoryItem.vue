@@ -1,6 +1,6 @@
 <template>
   <v-list-item color="primary" min-height="auto" :value="categoryItem.title">
-    <template class="pa-0" v-slot:prepend="{ isActive }">
+    <template v-slot:prepend="{ isActive }">
       <v-list-item-action start>
         <v-checkbox-btn :model-value="isActive"></v-checkbox-btn>
       </v-list-item-action>
