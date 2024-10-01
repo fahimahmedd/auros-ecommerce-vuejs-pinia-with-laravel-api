@@ -11,7 +11,7 @@
             slidesPerView: 3,
             spaceBetween: 5,
           },
-          '768': {
+          '600': {
             slidesPerView: 4,
             spaceBetween: 10,
           },

@@ -1,9 +1,6 @@
 <template>
   <v-container>
-    <div
-      class="product-feature overflow-hidden"
-      style="background-image: url('src/assets/images/feature/product-feature.jpg')"
-    >
+    <div class="product-feature overflow-hidden">
       <div
         class="d-none d-md-block"
         v-for="(item, index) in productRipple"
@@ -31,6 +28,7 @@ const productRipple = ref([
 
 <style lang="scss" scoped>
 .product-feature {
+  background-image: url(../../assets/images/feature/product-feature.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

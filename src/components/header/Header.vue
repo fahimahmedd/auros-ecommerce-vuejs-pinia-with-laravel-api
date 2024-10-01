@@ -7,6 +7,12 @@ import { RouterLink, useRoute } from "vue-router";
 const storeDrawer = useStoreDrawerCart();
 const userStore = useUserStore();
 const productStore = useProductStore();
+const drawer = ref(false);
+const group = ref(null);
+
+watch(group, () => {
+  drawer.value = false;
+});
 
 const cartProduct = computed(() => {
   return productStore.cartItems.length;
@@ -34,13 +40,18 @@ const props = defineProps({
       <div class="d-flex align-center justify-space-between">
         <!-- App logo -->
         <RouterLink class="log" to="/">
-          <v-img width="160" aspect-ratio="16/9" src="../../assets/images/logo/logo.svg">
+          <v-img
+            width="160"
+            aspect-ratio="16/9"
+            src="../../assets/images/logo/logo.svg"
+            class="logo-img"
+          >
           </v-img>
         </RouterLink>
 
         <!-- Navigation links -->
         <div class="login-btn d-flex align-center">
-          <div class="navigation-link mr-10 d-none">
+          <div class="navigation-link mr-10 d-none d-sm-block">
             <v-btn
               size="small"
               variant="text"
@@ -94,12 +105,21 @@ const props = defineProps({
             v-if="user"
             class="cursor-pointer"
             color="primary"
-            @click="userStore.userLogout"
+            @click.stop="userStore.userLogout"
           >
             <span class="text-h5 font-weight-bold">
               {{ user.name.toUpperCase().slice(0, 1) }}
             </span>
           </v-avatar>
+          <v-btn
+            @click.stop="drawer = !drawer"
+            elevation="0"
+            color="primary"
+            rounded="lg"
+            icon="mdi-menu"
+            size="small"
+            class="ml-4 d-sm-none"
+          ></v-btn>
         </div>
       </div>
       <div>
@@ -112,12 +132,49 @@ const props = defineProps({
           hide-details
           single-line
           width="100%"
-          class="d-sm-block d-md-none mt-4"
+          class="d-sm-none d-md-none mt-4"
         >
         </v-text-field>
       </div>
     </v-container>
   </header>
+  <!-- Navigation Drawer -->
+  <v-navigation-drawer
+    v-model="drawer"
+    location="left"
+    temporary
+    width="260"
+    elevation="0"
+    class="header-drawer"
+  >
+    <v-btn
+      class="drawer-close"
+      icon="mdi-close"
+      elevation="0"
+      variant="tonal"
+      color="primary"
+      size="small"
+      @click.stop="drawer = !drawer"
+    >
+    </v-btn>
+
+    <div class="drawer-container">
+      <div class="navigation-link d-flex flex-column">
+        <v-btn
+          size="medium"
+          variant="plain"
+          v-for="(item, index) in links"
+          :key="index"
+          :to="item.route"
+          color="#000"
+          active-color="primary"
+          class="mt-6"
+        >
+          {{ item.text }}
+        </v-btn>
+      </div>
+    </div>
+  </v-navigation-drawer>
 </template>
 
 <style scoped>
@@ -131,5 +188,38 @@ const props = defineProps({
 }
 
 @media (min-width: 280px) and (max-width: 599.98px) {
+  .v-navigation-drawer__scrim {
+    opacity: 0.3;
+    z-index: 9999999 !important;
+  }
+  .v-navigation-drawer {
+    z-index: 99999999 !important;
+    transform: none !important;
+    left: -265px !important;
+    transition: left 0.3s ease !important;
+    position: fixed !important;
+    height: 100vh !important;
+    top: 0 !important;
+  }
+  .v-navigation-drawer--active {
+    left: 0 !important;
+  }
+
+  .header-drawer {
+    position: relative;
+  }
+  .drawer-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  .drawer-container {
+    height: 100%;
+    padding-top: 40px;
+  }
+
+  .logo-img {
+    width: 140px !important;
+  }
 }
 </style>

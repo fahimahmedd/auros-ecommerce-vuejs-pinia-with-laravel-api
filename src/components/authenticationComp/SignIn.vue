@@ -26,8 +26,8 @@ const signIn = async () => {
     if (res.response.value && res.response.value.status === 200) {
       const token = res.response.value.data.token;
       localStorage.setItem("token", token);
-
       await userStore.updateToken(token);
+      userStore.user;
       router.push("/");
     } else {
       console.error("Login was unsuccessful:", res.response.value);
@@ -58,7 +58,7 @@ const rules = {
 </script>
 
 <template>
-  <v-card width="100%" max-width="400" elevation="0" class="pl-8">
+  <v-card width="100%" max-width="400" elevation="0" class="pl-8 mob-width-adjust">
     <div class="text-h5 font-weight-black text-uppercase text-center">Sign In</div>
     <v-divider class="my-5"></v-divider>
 
@@ -119,4 +119,12 @@ const rules = {
   </v-card>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@media (min-width: 280px) and (max-width: 960.98px) {
+  .mob-width-adjust {
+    padding-left: 0px !important;
+    padding: 40px 40px !important;
+    margin: 0 auto;
+  }
+}
+</style>

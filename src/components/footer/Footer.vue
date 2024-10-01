@@ -10,7 +10,7 @@
           ></v-img>
         </div>
         <v-row class="mt-10">
-          <v-col lg="3" cols="12">
+          <v-col lg="3" cols="12" sm="6" md="3">
             <div class="text-h6 secondary-font font-weight-bold">About Us</div>
             <ul>
               <li>
@@ -28,7 +28,7 @@
               </li>
             </ul>
           </v-col>
-          <v-col lg="3" cols="6">
+          <v-col lg="3" cols="6" sm="3" md="3">
             <div class="text-h6 secondary-font font-weight-bold">INFORMATION</div>
             <ul>
               <li><router-link to="/"> About Us </router-link></li>
@@ -38,7 +38,7 @@
               <li><router-link to="/"> Become an Affiliate </router-link></li>
             </ul>
           </v-col>
-          <v-col lg="2" cols="6">
+          <v-col lg="2" cols="6" sm="3" md="3">
             <div class="text-h6 secondary-font font-weight-bold">Shop</div>
             <ul>
               <li><router-link to="/"> Living Room </router-link></li>
@@ -49,7 +49,7 @@
               <li><router-link to="/"> Kitchen </router-link></li>
             </ul>
           </v-col>
-          <v-col lg="2" cols="6">
+          <v-col lg="2" cols="6" sm="3" md="3">
             <div class="text-h6 secondary-font font-weight-bold">INFORMATION</div>
             <ul>
               <li><router-link to="/"> About Us </router-link></li>
@@ -59,7 +59,7 @@
               <li><router-link to="/"> Become an Affiliate </router-link></li>
             </ul>
           </v-col>
-          <v-col lg="2" cols="6">
+          <v-col lg="2" cols="6" sm="3" md="3">
             <div class="text-h6 secondary-font font-weight-bold">Help</div>
             <ul>
               <li><router-link to="/"> Live Chat </router-link></li>
@@ -76,6 +76,8 @@
         <v-col
           lg="4"
           cols="12"
+          sm="4"
+          md="4"
           class="custom-footer-border mob-border-none d-flex flex-column align-center justify-center text-center"
         >
           <div><span class="mdi mdi-chat-outline"></span></div>
@@ -86,6 +88,8 @@
         <v-col
           lg="4"
           cols="6"
+          sm="4"
+          md="4"
           class="custom-footer-border d-flex flex-column align-center justify-center text-center"
         >
           <div><span class="mdi mdi-phone"></span></div>
@@ -108,6 +112,8 @@
         <v-col
           lg="4"
           cols="6"
+          sm="4"
+          md="4"
           class="d-flex flex-column align-center justify-center text-center"
         >
           <div><span class="mdi mdi-map-marker-outline"></span></div>
@@ -201,7 +207,7 @@ ul {
   }
 }
 
-@media (min-width: 280px) and (max-width: 960.98px) {
+@media (min-width: 280px) and (max-width: 590.98px) {
   .mob-border-none {
     border-right: none !important;
   }

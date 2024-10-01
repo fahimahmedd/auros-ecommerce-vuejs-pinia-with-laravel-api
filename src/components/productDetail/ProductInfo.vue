@@ -48,27 +48,13 @@ productStore.fetchProductExecute();
   </div>
   <v-divider class="mt-5"></v-divider>
   <div class="add-cart-container mt-5">
-    <!-- <v-text-field
-      prepend-inner-icon="mdi-minus"
-      append-inner-icon="mdi-plus"
-      variant="solo"
-      max-width="200"
-      height="50"
-      type="number"
-      rounded="lg"
-      class="number-text-center"
-      @click:append-inner="quantityIncrease"
-      @click:prepend-inner="quantityDecrease"
-      hide-details
-      v-model="productQuantity"
-    ></v-text-field> -->
-    <div class="d-flex ga-3 align-center mt-5">
+    <div class="d-flex align-center mt-5">
       <v-btn
         prepend-icon="mdi-cart"
         color="primary"
         height="50"
         rounded="lg"
-        width="50%"
+        width="48%"
         v-if="isItemInCart"
         disabled
       >
@@ -80,13 +66,15 @@ productStore.fetchProductExecute();
         height="50"
         rounded="lg"
         variant="outlined"
-        width="50%"
+        width="48%"
         @click="productStore.addToCard(productId)"
         v-else
       >
         Add To Cart
       </v-btn>
-      <v-btn width="50%" color="primary" height="50" rounded="lg"> Buy Now </v-btn>
+      <v-btn width="48%" class="ml-4" color="primary" height="50" rounded="lg">
+        Buy Now
+      </v-btn>
     </div>
   </div>
 </template>
@@ -113,5 +101,11 @@ productStore.fetchProductExecute();
 }
 .number-text-center :deep(input) {
   text-align: center;
+}
+
+@media (min-width: 280px) and (max-width: 960.98px) {
+  .text-h4 {
+    font-size: 30px !important;
+  }
 }
 </style>

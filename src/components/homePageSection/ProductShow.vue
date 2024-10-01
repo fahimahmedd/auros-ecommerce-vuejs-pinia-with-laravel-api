@@ -13,7 +13,14 @@
       </v-col>
       <v-col lg="8" cols="12">
         <div class="v-row">
-          <v-col lg="4" cols="6" v-for="(item, index) in productShow" :key="index">
+          <v-col
+            lg="4"
+            sm="4"
+            md="4"
+            cols="6"
+            v-for="(item, index) in productShow"
+            :key="index"
+          >
             <ProductShowItem
               :showItem="item"
               @click="$router.push(`/product-detail/${item.id}`)"

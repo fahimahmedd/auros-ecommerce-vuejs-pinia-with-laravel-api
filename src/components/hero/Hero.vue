@@ -1,10 +1,10 @@
 <template>
-  <v-container class="hero-section d-flex align-center h-screen pa-0">
+  <v-container class="hero-section d-flex align-center h-screen">
     <div class="hero-lamp position-absolute left-60 zIndex-2">
       <v-img src="../../assets/images/hero/lamp.svg" height="240" width="200"></v-img>
     </div>
     <v-row align="center" class="pa-0">
-      <v-col lg="6" cols="12">
+      <v-col lg="6" cols="12" sm="6" md="6">
         <v-card elevation="0">
           <v-card-item>
             <div class="text-h2 font-weight-black">
@@ -37,12 +37,13 @@
           </v-card-item>
         </v-card>
       </v-col>
-      <v-col lg="6" cols="12">
+      <v-col lg="6" cols="12" sm="6" md="6">
         <div class="hero-img position-relative zIndex-2">
           <v-img
             src="../../assets/images/product/brown-coution.png "
             class="mx-auto"
             max-height="400"
+            max-width="100%"
           >
           </v-img>
         </div>
@@ -75,21 +76,31 @@
   background: radial-gradient(#ffbc11b7, rgba(1, 65, 255, 0));
 }
 
-@media (min-width: 280px) and (max-width: 599.98px) {
+@media (min-width: 280px) and (max-width: 757.98px) {
   .text-h2 {
     font-size: 34px !important;
   }
   .hero-lamp {
-    height: 140px;
-    width: 140px;
+    height: 220px;
+    width: 220px;
     top: -20px;
     right: 0;
     left: auto;
   }
   .hero-img-bg {
     height: 350px;
-    width: 100%;
-    display: none;
+    width: 270px;
+  }
+}
+@media (min-width: 700px) and (max-width: 960.98px) {
+  .hero-img-bg {
+    height: 350px;
+    bottom: 100px;
+    width: 300px;
+  }
+  .hero-lamp {
+    top: -85px;
+    left: 100px;
   }
 }
 </style>

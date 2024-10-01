@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="service-feature"
-    style="background-image: url('src/assets/images/feature/servFeature.webp')"
-  >
+  <div class="service-feature">
     <v-container>
       <div class="service-feature-wrapper">
         <div class="text-h3 text-uppercase font-weight-black secondary-font text-center">
@@ -53,6 +50,7 @@ const serviceFeature = ref([
 .service-feature {
   padding: 120px 0;
   width: 100%;
+  background-image: url(../../assets/images/feature/servFeature.webp);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

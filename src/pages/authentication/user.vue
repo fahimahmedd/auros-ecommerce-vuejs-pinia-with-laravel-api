@@ -17,13 +17,13 @@ const handleShowSnackbar = () => {
   <v-container fluid class="pa-0">
     <div class="authentication-graphic">
       <v-row class="align-center ma-0">
-        <v-col cols="8" class="pa-0">
+        <v-col lg="8" cols="12" class="pa-0 d-none d-md-block">
           <AuthenticationGraphic />
         </v-col>
-        <v-col v-if="autheticate.showSigIn" cols="4" class="pa-0">
+        <v-col v-if="autheticate.showSigIn" lg="4" cols="12" class="pa-0">
           <SignIn />
         </v-col>
-        <v-col v-if="!autheticate.showSigIn" cols="4" class="pa-0">
+        <v-col v-if="!autheticate.showSigIn" lg="4" cols="12" class="pa-0">
           <SignUp @showSnackbar="handleShowSnackbar" />
         </v-col>
       </v-row>
@@ -34,4 +34,13 @@ const handleShowSnackbar = () => {
   </v-container>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@media (min-width: 280px) and (max-width: 960.98px) {
+  .authentication-graphic {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+</style>

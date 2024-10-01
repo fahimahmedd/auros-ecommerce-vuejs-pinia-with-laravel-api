@@ -33,7 +33,7 @@ const props = defineProps({
   background-color: #f3f3f3;
 }
 
-@media (min-width: 280px) and (max-width: 599.98px) {
+@media (min-width: 280px) and (max-width: 960.98px) {
   .mob-adjust-height {
     height: 140px !important;
   }

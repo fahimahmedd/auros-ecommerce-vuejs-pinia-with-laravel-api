@@ -5,7 +5,15 @@
     </div> -->
     <div class="all-product-container mt-1">
       <v-row>
-        <v-col class="pa-2" cols="3" v-for="(product, index) in products" :key="index">
+        <v-col
+          class="pa-2"
+          lg="3"
+          sm="4"
+          md="3"
+          cols="6"
+          v-for="(product, index) in products"
+          :key="index"
+        >
           <ProductItem
             :height="210"
             :product-item="product"

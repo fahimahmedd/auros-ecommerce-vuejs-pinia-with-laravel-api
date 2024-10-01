@@ -18,10 +18,29 @@
     :freeMode="true"
     :watchSlidesProgress="true"
     :modules="modules"
+    :breakpoints="{
+      '280': {
+        slidesPerView: 4,
+        spaceBetween: 10,
+      },
+      '768': {
+        slidesPerView: 5,
+        spaceBetween: 10,
+      },
+    }"
     class="mySwiper"
   >
-    <swiper-slide v-for="(productImage, index) in productSlideImg" :key="index">
-      <v-img :src="productImage.image" max-height="80" width="100%"></v-img>
+    <swiper-slide
+      v-for="(productImage, index) in productSlideImg"
+      :key="index"
+      class="border"
+    >
+      <v-img
+        :src="productImage.image"
+        max-height="80"
+        width="100%"
+        class="mob-sub-img"
+      ></v-img>
     </swiper-slide>
   </swiper>
 </template>
@@ -83,11 +102,19 @@ const productSlideImg = ref([
   padding-right: 10px;
   margin-top: 20px;
   .swiper-slide {
-    border: 1px solid #f7f7f7;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
+  }
+}
+
+@media (min-width: 280px) and (max-width: 599.98px) {
+  .mySwiper2 {
+    height: 260px;
+  }
+  .mySwiper {
+    height: 100px;
   }
 }
 </style>

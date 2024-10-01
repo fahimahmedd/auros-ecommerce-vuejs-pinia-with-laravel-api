@@ -54,7 +54,7 @@ const isSubmitDisable = computed(() => {
 </script>
 
 <template>
-  <v-card width="100%" max-width="400" elevation="0" class="pl-8">
+  <v-card width="100%" max-width="400" elevation="0" class="pl-8 mob-width-adjust">
     <div class="text-h5 font-weight-black text-uppercase text-center">Sign Up</div>
     <v-divider class="my-5"></v-divider>
     <div class="text-subtitle-1 text-medium-emphasis mt-8">Name</div>
@@ -124,4 +124,12 @@ const isSubmitDisable = computed(() => {
   </v-card>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@media (min-width: 280px) and (max-width: 960.98px) {
+  .mob-width-adjust {
+    padding-left: 0px !important;
+    padding: 40px 40px !important;
+    margin: 0 auto;
+  }
+}
+</style>

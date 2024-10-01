@@ -17,7 +17,6 @@ export const useUserStore = defineStore("userStore", () => {
         },
       });
       user.value = data.value; 
-      console.log(user.value)
     } catch (error) {
       user.value = null; 
     } 

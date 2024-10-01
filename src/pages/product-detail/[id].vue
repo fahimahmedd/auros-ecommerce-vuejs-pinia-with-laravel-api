@@ -1,10 +1,10 @@
 <template>
   <v-container class="mt-5">
     <v-row>
-      <v-col cols="7">
+      <v-col lg="7" md="6" cols="12">
         <ProductImages />
       </v-col>
-      <v-col cols="5">
+      <v-col lg="5" md="6" cols="12">
         <ProductInfo />
       </v-col>
     </v-row>
