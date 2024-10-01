@@ -136,3 +136,12 @@ p{
 .swiper-button-disabled{
     display: none;
 }
+
+
+
+// Breakpoint 
+@media (min-width: 280px) and (max-width: 960.98px) {
+    .section-padding-top {
+        padding-top: 20px;
+    } 
+}

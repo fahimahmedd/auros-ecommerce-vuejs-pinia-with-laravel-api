@@ -10,17 +10,32 @@ const router = useRouter();
 const email = ref();
 const password = ref();
 
-const signIn = async () => {
-  const res = await authenticate.executeLogin({
-    data: {
-      email: email.value,
-      password: password.value,
-    },
-  });
+const loginFailed = ref("");
 
-  if (res.response.value.status == 200) {
-    await userStore.fetchUserExecute();
-    router.push("/");
+const signIn = async () => {
+  if (isSubmitDisable.value) return;
+
+  try {
+    const res = await authenticate.executeLogin({
+      data: {
+        email: email.value,
+        password: password.value,
+      },
+    });
+
+    if (res.response.value && res.response.value.status === 200) {
+      const token = res.response.value.data.token;
+      localStorage.setItem("token", token);
+
+      await userStore.updateToken(token);
+      router.push("/");
+    } else {
+      console.error("Login was unsuccessful:", res.response.value);
+      loginFailed.value = "Login failed, please check your credentials.";
+    }
+  } catch (e) {
+    console.error(e);
+    loginFailed.value = e.response ? e.response.data.message : "An error occurred";
   }
 };
 
@@ -53,6 +68,7 @@ const rules = {
       prepend-inner-icon="mdi-email"
       class="mt-3"
       :rules="[rules.email]"
+      @keydown.enter="signIn"
     ></v-text-field>
 
     <div
@@ -73,11 +89,14 @@ const rules = {
       :rules="[rules.min]"
       prepend-inner-icon="mdi-lock"
       class="mt-3"
+      @keydown.enter="signIn"
     ></v-text-field>
-    <v-card-text class="d-none text-medium-emphasis text-caption pa-2 assh-bg-color">
-      Warning: After 3 consecutive failed login attempts,
-    </v-card-text>
-
+    <div
+      class="text-medium-emphasis text-center text-caption"
+      v-if="loginFailed && loginFailed.length"
+    >
+      {{ loginFailed }}
+    </div>
     <v-btn
       @click="signIn"
       color="primary"

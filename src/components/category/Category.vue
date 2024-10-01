@@ -6,6 +6,20 @@
         :spaceBetween="20"
         :navigation="true"
         :modules="modules"
+        :breakpoints="{
+          '280': {
+            slidesPerView: 3,
+            spaceBetween: 5,
+          },
+          '768': {
+            slidesPerView: 4,
+            spaceBetween: 10,
+          },
+          '1024': {
+            slidesPerView: 6,
+            spaceBetween: 20,
+          },
+        }"
         class="mySwiper"
       >
         <swiper-slide v-for="(item, index) in allCategory" :key="index" class="pb-1">

@@ -1,10 +1,10 @@
 <template>
-  <v-container class="hero-section d-flex align-center h-screen">
+  <v-container class="hero-section d-flex align-center h-screen pa-0">
     <div class="hero-lamp position-absolute left-60 zIndex-2">
       <v-img src="../../assets/images/hero/lamp.svg" height="240" width="200"></v-img>
     </div>
-    <v-row align="center">
-      <v-col cols="6">
+    <v-row align="center" class="pa-0">
+      <v-col lg="6" cols="12">
         <v-card elevation="0">
           <v-card-item>
             <div class="text-h2 font-weight-black">
@@ -30,14 +30,14 @@
               variant="flat"
               color="primary"
               rounded="lg"
-              class="mt-4"
+              class="mt-4 m-index-adjust"
             >
               Shop Now
             </v-btn>
           </v-card-item>
         </v-card>
       </v-col>
-      <v-col cols="6">
+      <v-col lg="6" cols="12">
         <div class="hero-img position-relative zIndex-2">
           <v-img
             src="../../assets/images/product/brown-coution.png "
@@ -73,5 +73,23 @@
   transform: translateZ(0);
   z-index: 1;
   background: radial-gradient(#ffbc11b7, rgba(1, 65, 255, 0));
+}
+
+@media (min-width: 280px) and (max-width: 599.98px) {
+  .text-h2 {
+    font-size: 34px !important;
+  }
+  .hero-lamp {
+    height: 140px;
+    width: 140px;
+    top: -20px;
+    right: 0;
+    left: auto;
+  }
+  .hero-img-bg {
+    height: 350px;
+    width: 100%;
+    display: none;
+  }
 }
 </style>

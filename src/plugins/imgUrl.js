@@ -1,1 +1,1 @@
-export const imgUrl = 'http://localhost:8000/uploads/media'
+export const imgUrl = 'https://shoes.sohibd.com/ecom/public/uploads/media'

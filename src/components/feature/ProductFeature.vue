@@ -4,7 +4,12 @@
       class="product-feature overflow-hidden"
       style="background-image: url('src/assets/images/feature/product-feature.jpg')"
     >
-      <div v-for="(item, index) in productRipple" :key="index" :class="item.positionName">
+      <div
+        class="d-none d-md-block"
+        v-for="(item, index) in productRipple"
+        :key="index"
+        :class="item.positionName"
+      >
         <FeatureRipple :rippleItem="item" />
       </div>
     </div>
@@ -56,5 +61,14 @@ const productRipple = ref([
   bottom: 70px;
   right: 38%;
   transform: translateX(-38%);
+}
+
+@media (min-width: 280px) and (max-width: 960.98px) {
+  .product-feature {
+    height: auto;
+    min-height: 200px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
 }
 </style>

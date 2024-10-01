@@ -12,7 +12,7 @@
           Simply become a member of the Club and start enjoying the benefits of shopping
         </p>
         <v-row class="mt-10">
-          <v-col cols="3" v-for="(item, index) in serviceFeature" :key="index">
+          <v-col lg="3" cols="6" v-for="(item, index) in serviceFeature" :key="index">
             <ServiceFeatureCard :service-feature="item" />
           </v-col>
         </v-row>
@@ -78,5 +78,19 @@ const serviceFeature = ref([
   min-height: 400px;
   max-width: 1000px;
   margin: 0 auto;
+}
+
+@media (min-width: 280px) and (max-width: 960.98px) {
+  .service-feature {
+    padding: 50px 0px;
+    margin-top: 40px;
+  }
+  .service-feature-wrapper[data-v-9650431a] {
+    padding: 30px 20px;
+    min-height: 400px;
+  }
+  .text-h3 {
+    font-size: 34px !important;
+  }
 }
 </style>

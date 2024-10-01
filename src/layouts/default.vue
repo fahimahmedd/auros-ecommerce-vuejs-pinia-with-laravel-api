@@ -10,10 +10,7 @@ const authentiacatePage = computed(() => route.path === "/authentication/user");
 
 const userStore = useUserStore();
 const user = computed(() => userStore.user);
-
-onMounted(() => {
-  userStore.fetchUserExecute();
-});
+userStore.fetchUserExecute();
 </script>
 <template>
   <v-app>

@@ -10,7 +10,7 @@
           ></v-img>
         </div>
         <v-row class="mt-10">
-          <v-col cols="3">
+          <v-col lg="3" cols="12">
             <div class="text-h6 secondary-font font-weight-bold">About Us</div>
             <ul>
               <li>
@@ -28,7 +28,7 @@
               </li>
             </ul>
           </v-col>
-          <v-col cols="3">
+          <v-col lg="3" cols="6">
             <div class="text-h6 secondary-font font-weight-bold">INFORMATION</div>
             <ul>
               <li><router-link to="/"> About Us </router-link></li>
@@ -38,7 +38,7 @@
               <li><router-link to="/"> Become an Affiliate </router-link></li>
             </ul>
           </v-col>
-          <v-col cols="2">
+          <v-col lg="2" cols="6">
             <div class="text-h6 secondary-font font-weight-bold">Shop</div>
             <ul>
               <li><router-link to="/"> Living Room </router-link></li>
@@ -49,7 +49,7 @@
               <li><router-link to="/"> Kitchen </router-link></li>
             </ul>
           </v-col>
-          <v-col cols="2">
+          <v-col lg="2" cols="6">
             <div class="text-h6 secondary-font font-weight-bold">INFORMATION</div>
             <ul>
               <li><router-link to="/"> About Us </router-link></li>
@@ -59,7 +59,7 @@
               <li><router-link to="/"> Become an Affiliate </router-link></li>
             </ul>
           </v-col>
-          <v-col cols="2">
+          <v-col lg="2" cols="6">
             <div class="text-h6 secondary-font font-weight-bold">Help</div>
             <ul>
               <li><router-link to="/"> Live Chat </router-link></li>
@@ -74,8 +74,9 @@
 
       <v-row class="footer-info">
         <v-col
-          cols="4"
-          class="custom-footer-border d-flex flex-column align-center justify-center text-center"
+          lg="4"
+          cols="12"
+          class="custom-footer-border mob-border-none d-flex flex-column align-center justify-center text-center"
         >
           <div><span class="mdi mdi-chat-outline"></span></div>
           <div class="text-h6 mt-2 font-weight-bold secondary-font">Need Help?</div>
@@ -83,7 +84,8 @@
           <v-btn class="mt-5" color="#000"> Chat Now </v-btn>
         </v-col>
         <v-col
-          cols="4"
+          lg="4"
+          cols="6"
           class="custom-footer-border d-flex flex-column align-center justify-center text-center"
         >
           <div><span class="mdi mdi-phone"></span></div>
@@ -104,7 +106,8 @@
           </ul>
         </v-col>
         <v-col
-          cols="4"
+          lg="4"
+          cols="6"
           class="d-flex flex-column align-center justify-center text-center"
         >
           <div><span class="mdi mdi-map-marker-outline"></span></div>
@@ -195,6 +198,15 @@ ul {
         line-height: 0px;
       }
     }
+  }
+}
+
+@media (min-width: 280px) and (max-width: 960.98px) {
+  .mob-border-none {
+    border-right: none !important;
+  }
+  .footer-info {
+    height: auto;
   }
 }
 </style>

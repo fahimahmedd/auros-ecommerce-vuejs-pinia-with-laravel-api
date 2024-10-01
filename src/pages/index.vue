@@ -7,6 +7,8 @@ import Hero from "@/components/hero/Hero.vue";
 import BestSellingProduct from "@/components/homePageSection/BestSellingProduct.vue";
 import PopularProduct from "@/components/homePageSection/PopularProduct.vue";
 import ProductShow from "@/components/homePageSection/ProductShow.vue";
+import IsCategoryLoading from "@/components/isLoading/isCategoryLoading.vue";
+import IsProductLoading from "@/components/isLoading/isProductLoading.vue";
 import { useCategoryStore } from "@/stores/categoryStore";
 import { useProductStore } from "@/stores/productStore";
 import { computed } from "vue";
@@ -23,22 +25,25 @@ const catgeory = computed(() => {
 });
 </script>
 <template>
-  <div
-    v-if="useProduct.productsLoading"
-    class="d-flex justify-center align-center"
-    style="height: 600px"
-  >
-    <div class="text-h4 font-weight-bold text-medium-emphasis">Loading...</div>
+  <Hero />
+  <!-- Category Section -->
+  <div>
+    <IsCategoryLoading v-if="useCategory.categoryLoading" />
+    <Category v-else :all-category="catgeory" />
   </div>
-  <div v-else>
-    <Hero />
-    <Category :all-category="catgeory" />
-    <Feature />
-    <BestSellingProduct :products="products" />
-    <ProductFeature />
-    <ProductShow />
-    <HomeFeature />
-    <PopularProduct />
-    <ServiceFeature />
+
+  <Feature />
+  <div>
+    <IsProductLoading v-if="useProduct.productsLoading" />
+    <BestSellingProduct v-else :products="products" />
   </div>
+
+  <ProductFeature />
+  <ProductShow :products="products" />
+  <HomeFeature :products="products" />
+  <div>
+    <IsProductLoading v-if="useProduct.productsLoading" />
+    <PopularProduct v-else :products="products" />
+  </div>
+  <ServiceFeature />
 </template>

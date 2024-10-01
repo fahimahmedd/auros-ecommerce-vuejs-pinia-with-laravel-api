@@ -1,12 +1,16 @@
 <template>
   <v-container fluid class="d-flex ga-8">
-    <div class="product-side-category">
+    <!-- <div class="product-side-category">
       <SideCategory />
-    </div>
+    </div> -->
     <div class="all-product-container mt-1">
       <v-row>
-        <v-col class="pa-2" cols="3" v-for="(product, index) in allProduct" :key="index">
-          <ProductItem :height="210" :product-item="product" />
+        <v-col class="pa-2" cols="3" v-for="(product, index) in products" :key="index">
+          <ProductItem
+            :height="210"
+            :product-item="product"
+            @click="$router.push(`/product-detail/${product.id}`)"
+          />
         </v-col>
       </v-row>
     </div>
@@ -16,6 +20,13 @@
 <script setup>
 import { ref } from "vue";
 import ProductItem from "../product/ProductItem.vue";
+
+const props = defineProps({
+  products: {
+    type: Array,
+    default: [],
+  },
+});
 
 const allProduct = ref([
   {

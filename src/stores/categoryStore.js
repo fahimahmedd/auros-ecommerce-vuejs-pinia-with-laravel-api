@@ -11,11 +11,10 @@ export const useCategoryStore = defineStore("categoryStore", () => {
 
 
   const getSubCategory = (id) => {
-    // Ensure data is loaded and defined
     if (category.value && category.value.length > 0) {
       return category.value.find((item) => item.id == id);
     }
-    return null; // Or handle it as needed
+    return null;
   };
   
   return { fetchCategoryExecute, category, categoryLoading , getSubCategory};

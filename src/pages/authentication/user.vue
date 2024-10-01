@@ -8,7 +8,6 @@ import { ref } from "vue";
 const autheticate = useAuthentication();
 
 const showSignupSnackBar = ref(false);
-
 const handleShowSnackbar = () => {
   showSignupSnackBar.value = true;
 };

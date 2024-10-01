@@ -9,10 +9,27 @@
         :spaceBetween="20"
         :navigation="true"
         :modules="modules"
+        :breakpoints="{
+          '280': {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          '768': {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          '1024': {
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+        }"
         class="mySwiper"
       >
         <swiper-slide v-for="(product, index) in products" :key="index" class="pb-1">
-          <ProductItem :product-item="product" />
+          <ProductItem
+            :product-item="product"
+            @click="$router.push(`/product-detail/${product.id}`)"
+          />
         </swiper-slide>
       </swiper>
     </v-container>
@@ -39,45 +56,15 @@ const props = defineProps({
 });
 // Define the modules
 const modules = [Navigation];
-
-const bestSelling = ref([
-  {
-    name: "DOUBLE SOFA - POMPEI",
-    image: "src/assets/images/product/brown-coution.png",
-    model: "SDC-227-9-1-66 (REXINE)",
-    price: "24,000",
-  },
-  {
-    name: "CHAIR SOFA - POMPEI",
-    image: "src/assets/images/product/purple-chair.png",
-    model: "SDC-227-9-1-66",
-    price: "22,000",
-  },
-  {
-    name: "SOFA SET WITH TEA TABLE",
-    image: "src/assets/images/product/sofaset.png",
-    model: "SDC-118-9-1-66",
-    price: "16,000",
-  },
-  {
-    name: "SINGLE UNIQUE CHAIR",
-    image: "src/assets/images/product/chair.png",
-    model: "SDC-227-9-1-66",
-    price: "14,000",
-  },
-  {
-    name: "LEATHER SOFT SEAT",
-    image: "src/assets/images/product/leather-soft.png",
-    model: "SDC-227-9-1-66",
-    price: "11,000",
-  },
-  {
-    name: "SOFT UNIQUE CHAIR",
-    image: "src/assets/images/product/soft-chair.png",
-    model: "SDC-227-9-1-66",
-    price: "9,000",
-  },
-]);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media (min-width: 280px) and (max-width: 960.98px) {
+  .text-h3 {
+    font-size: 28px !important;
+  }
+  .section-heading {
+    margin-bottom: 20px !important;
+  }
+}
+</style>

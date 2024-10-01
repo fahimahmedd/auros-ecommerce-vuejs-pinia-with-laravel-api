@@ -2,9 +2,9 @@
   <div class="section-padding-top">
     <v-container>
       <v-row>
-        <v-col cols="6">
+        <v-col lg="6" cols="12">
           <v-card elevation="0">
-            <v-card-item>
+            <v-card-item class="pa-0">
               <div class="subtitle font-weight-bold primary-color">Home Decor Hub</div>
               <div class="text-h3 font-weight-black mt-2">
                 Exceptional Furniture's For Indoor & Outdoor
@@ -24,9 +24,9 @@
             </v-card-item>
           </v-card>
         </v-col>
-        <v-col cols="6">
+        <v-col lg="6" cols="12">
           <v-card elevation="0">
-            <v-card-item>
+            <v-card-item class="pa-0">
               <v-img
                 width="100%"
                 rounded="lg"
@@ -65,4 +65,10 @@
 
 <script setup></script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@media (min-width: 280px) and (max-width: 599.98px) {
+  .text-h3 {
+    font-size: 38px !important;
+  }
+}
+</style>

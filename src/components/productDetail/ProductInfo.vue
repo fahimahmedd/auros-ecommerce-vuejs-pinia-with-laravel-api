@@ -1,3 +1,29 @@
+<script setup>
+import { useProductStore } from "@/stores/productStore";
+import { computed, ref } from "vue";
+import { useRoute } from "vue-router";
+const productStore = useProductStore();
+const route = useRoute();
+
+const productId = route.params.id;
+
+const isItemInCart = computed(() => {
+  return productStore.cartItems.some((item) => item.id == productId);
+});
+
+const productQuantity = ref(1);
+const quantityIncrease = () => productQuantity.value++;
+const quantityDecrease = () => {
+  if (productQuantity.value === 1) {
+    productQuantity.value = 1;
+  } else {
+    productQuantity.value--;
+  }
+};
+
+productStore.fetchProductExecute();
+</script>
+
 <template>
   <div class="category-highlight">Sofa</div>
   <div class="text-h4 font-weight-black mt-2">DOUBLE SOFA - POMPEI</div>
@@ -16,11 +42,13 @@
       <li>Spacious Seating: Generously sized .</li>
       <li>Stylish Design: A sleek, modern design that complements any interior decor,</li>
       <li>Sturdy Build: Constructed with a solid wood frame and reinforced.</li>
+      <li>Durable Fabric: Upholstered in high-quality.</li>
+      <li>Spacious Seating: Generously sized .</li>
     </ul>
   </div>
   <v-divider class="mt-5"></v-divider>
   <div class="add-cart-container mt-5">
-    <v-text-field
+    <!-- <v-text-field
       prepend-inner-icon="mdi-minus"
       append-inner-icon="mdi-plus"
       variant="solo"
@@ -33,8 +61,19 @@
       @click:prepend-inner="quantityDecrease"
       hide-details
       v-model="productQuantity"
-    ></v-text-field>
+    ></v-text-field> -->
     <div class="d-flex ga-3 align-center mt-5">
+      <v-btn
+        prepend-icon="mdi-cart"
+        color="primary"
+        height="50"
+        rounded="lg"
+        width="50%"
+        v-if="isItemInCart"
+        disabled
+      >
+        Already added
+      </v-btn>
       <v-btn
         prepend-icon="mdi-cart"
         color="primary"
@@ -42,6 +81,8 @@
         rounded="lg"
         variant="outlined"
         width="50%"
+        @click="productStore.addToCard(productId)"
+        v-else
       >
         Add To Cart
       </v-btn>
@@ -49,19 +90,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-const productQuantity = ref(1);
-const quantityIncrease = () => productQuantity.value++;
-const quantityDecrease = () => {
-  if (productQuantity.value === 1) {
-    productQuantity.value = 1;
-  } else {
-    productQuantity.value--;
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 .category-highlight {

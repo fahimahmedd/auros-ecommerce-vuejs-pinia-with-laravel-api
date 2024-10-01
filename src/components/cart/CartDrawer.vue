@@ -1,5 +1,18 @@
+<script setup>
+import { useProductStore } from "@/stores/productStore";
+import { useStoreDrawerCart } from "@/stores/storeDrawerCart";
+import { onMounted } from "vue";
+
+const storeDrawer = useStoreDrawerCart();
+const productStore = useProductStore();
+
+onMounted(() => {
+  productStore.fetchProductExecute();
+  productStore.cartItems;
+});
+</script>
+
 <template>
-  <!-- <v-sheet v-if="storeDrawer.drawer" elevation="2" height="100%" width="360"></v-sheet> -->
   <v-navigation-drawer
     v-model="storeDrawer.drawer"
     location="right"
@@ -20,7 +33,16 @@
           @click="storeDrawer.drawerHandle"
         ></v-btn>
       </v-sheet>
-      <div class="cart-drawer-content"></div>
+      <div
+        class="cart-drawer-content"
+        v-if="productStore.cartItems && productStore.cartItems.length"
+      >
+        <v-card class="cart-card-container" rounded="lg">
+          <div v-for="(cartItem, index) in productStore.cartItems" :key="index">
+            <CartCard :cart-item="cartItem" />
+          </div>
+        </v-card>
+      </div>
       <v-sheet class="cart-drawer-footer">
         <div
           class="cart-proceed-container d-flex justify-space-between align-center pa-2"
@@ -42,12 +64,6 @@
     </v-sheet>
   </v-navigation-drawer>
 </template>
-
-<script setup>
-import { useStoreDrawerCart } from "@/stores/storeDrawerCart";
-
-const storeDrawer = useStoreDrawerCart();
-</script>
 
 <style lang="scss" scoped>
 .v-navigation-drawer__scrim {
@@ -74,7 +90,7 @@ const storeDrawer = useStoreDrawerCart();
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .cart-drawer-content {
-  padding: 70px 20px 80px 20px;
+  padding: 70px 10px 80px 10px;
 }
 
 .cart-drawer-footer {
@@ -102,5 +118,9 @@ const storeDrawer = useStoreDrawerCart();
   align-items: center;
   color: #fff;
   font-size: 22px;
+}
+.cart-card-container {
+  box-shadow: rgba(0, 0, 0, 0.051) 0px 2px 4px;
+  border: 1px solid #c3c3c36d;
 }
 </style>
