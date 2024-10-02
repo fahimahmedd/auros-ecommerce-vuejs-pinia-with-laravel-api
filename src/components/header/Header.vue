@@ -95,10 +95,22 @@ const props = defineProps({
             variant="outlined"
             color="primary"
             rounded="lg"
+            class="d-none d-sm-flex"
             to="/authentication/user"
             v-if="!user"
           >
             Login
+          </v-btn>
+          <v-btn
+            icon="mdi-account-circle"
+            variant="outlined"
+            color="primary"
+            rounded="lg"
+            size="small"
+            class="d-flex d-sm-none"
+            to="/authentication/user"
+            v-if="!user"
+          >
           </v-btn>
 
           <v-avatar

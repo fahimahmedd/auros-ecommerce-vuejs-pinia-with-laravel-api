@@ -88,8 +88,8 @@
     left: auto;
   }
   .hero-img-bg {
-    height: 350px;
-    width: 270px;
+    height: 300px;
+    width: 240px;
   }
 }
 @media (min-width: 700px) and (max-width: 960.98px) {
@@ -101,6 +101,15 @@
   .hero-lamp {
     top: -85px;
     left: 100px;
+  }
+}
+@media (min-width: 280px) and (max-width: 380.98px) {
+  .hero-lamp {
+    height: 100px;
+    width: 100px;
+    top: -20px;
+    right: 0;
+    left: auto;
   }
 }
 </style>
